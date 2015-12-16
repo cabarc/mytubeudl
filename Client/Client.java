@@ -40,18 +40,27 @@ public class Client {
 					case 1:  
 						System.out.println("Enter filepath:");
 						String pathfile = br.readLine();
-						System.out.println("Enter description file:");
-						desc = br.readLine();
+						File files = new File(pathfile);
+						long fileSize = files.length();
+						long fileMB = (long) (double)fileSize/(1024*1024);
 						
-						Path path = Paths.get(pathfile);
-						byte[] data = Files.readAllBytes(path);	
+						if (fileMB<1.0){
+							System.out.println("Enter description file:");
+							desc = br.readLine();
 							
-						String[] partpath = pathfile.split("/");
-						String file = partpath[partpath.length-1];
-
-						output = stub.uploadFile(file, desc, data);
-						System.out.println(output);
-						break;
+							Path path = Paths.get(pathfile);
+							byte[] data = Files.readAllBytes(path);	
+								
+							String[] partpath = pathfile.split("/");
+							String file = partpath[partpath.length-1];
+	
+							output = stub.uploadFile(file, desc, data);
+							System.out.println(output);
+							break;
+						} else {
+							System.out.println("size limit exceeded");
+							break;
+						}
 					case 2:
 						System.out.println("Enter filename");   
 						desc = br.readLine();

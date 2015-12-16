@@ -17,10 +17,11 @@ public class Upload extends HttpServlet {
 		boolean exists = false;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String filename = req.getParameter("key");
+		String description = req.getParameter("description");
 		String host = req.getParameter("host");
 		String port = req.getParameter("port");
 		Date date = new Date();
-		Arquivo arquivo = new Arquivo(filename, host, port, date);
+		Arquivo arquivo = new Arquivo(filename, description, host, port, date);
 
 		Query query = pm.newQuery(Arquivo.class);
 		List<Arquivo> arquivos = null;
@@ -33,7 +34,12 @@ public class Upload extends HttpServlet {
 
 		resp.setContentType("text/html");
 		for (Arquivo i : arquivos) {
-			if (i.getKey().equals(filename)) {
+			if ((i.getKey().equals(filename))) {
+				exists = true;
+				resp.setHeader("key", "FIAL");
+				resp.getWriter().println("FIAL");
+			}
+			if ((i.getDescription().equals(description))) {
 				exists = true;
 				resp.setHeader("key", "FIAL");
 				resp.getWriter().println("FIAL");

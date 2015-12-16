@@ -1,0 +1,3 @@
+grant codeBase "file:/home/e/edf2/Escriptori/Client/src"{
+	permission java.security.AllPermission;
+}

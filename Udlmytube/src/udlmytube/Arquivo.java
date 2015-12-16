@@ -13,6 +13,9 @@ public class Arquivo {
 	private String key;	
 	
 	@Persistent
+	private String description;
+	
+	@Persistent
 	private String host;
 
 	@Persistent
@@ -21,8 +24,9 @@ public class Arquivo {
 	@Persistent
 	private Date date;
 
-	public Arquivo(String key, String host, String port, Date date) {
+	public Arquivo(String key, String description, String host, String port, Date date) {
 		this.key = key;
+		this.description = description;
 		this.host = host;
 		this.port = port;
 		this.date = date;
@@ -32,12 +36,12 @@ public class Arquivo {
 		return id;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
-
 	public String getKey() {
 		return this.key;
+	}
+
+	public String getDescription() {
+		return this.description;
 	}
 	
 	public void setHost(String host) {
